@@ -1,27 +1,48 @@
-const ListItems = ({data}) => {
-    console.log(data)
+import { useState } from "react"
+
+
+const ListItems = ({ data, updateItemTitle }) => {
+    const [counter, setCounter] = useState(0)
+
+    const increaseCounterByOne = () => {
+        setCounter(counter+1)
+    }
+
+    const decreaseCounterByOne = () => {
+        if(counter === 0) {
+            return;
+        }
+        setCounter(counter-1)
+    }
+
     return (
         <div className={"item-card"}>
-            <img src={`/assets/${data.thumbnail}`} alt="some image"></img>
-            <div className={"item-card_information"}>
+            <img className={"img-fluid"} src={`/assets/${data.thumbnail}`} alt={data.title}/>
+            <div className={"item-card__information"}>
                 <div className={"pricing"}>
-                    <span>
-                        ${data.discountedPrice}
-                    </span>
+                    <span>₹{data.discountedPrice}</span>
                     <small>
-                        <strike>${data.price}</strike>
+                        <strike>₹{data.price}</strike>
                     </small>
                 </div>
                 <div className={"title"}>
                     <h3>{data.title}</h3>
                 </div>
-                <button className={"cart-add"} onClick={ () => {console.log("clicked", data)}}>
-                    <span>Add To Cart</span>
-                    <img src></img>
-                </button>
             </div>
+            <button onClick={() => updateItemTitle(data.id)}>Update the title</button>
+            {
+                counter < 1 ?
+                <button className={"cart-add"} onClick={increaseCounterByOne}>
+                    <span>Add to Cart</span>
+                </button>
+                :
+                <div className="cart-addon">
+                    <button onClick={decreaseCounterByOne}><span>-</span></button>
+                    <span>{counter}</span>
+                    <button onClick={increaseCounterByOne}><span>+</span></button>
+                </div>
+            }
         </div>
-       
     )
 }
 

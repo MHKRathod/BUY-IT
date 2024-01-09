@@ -1,11 +1,15 @@
-import React from "react";
-import Products from "./components/Products.js"
+import Header from "./components/layout/Header.js";
+import SubHeader from "./components/layout/SubHeader.js";
+import Products from "./components/products.js"
 
 const App = () => {
   return (
     <div>
-      <Products></Products>
+      <Header />
+      <SubHeader />
+      <Products />
     </div>
   )
 }
+
 export default App
