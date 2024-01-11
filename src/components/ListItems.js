@@ -2,59 +2,62 @@ import { Fragment, useState } from "react"
 import Modal from "./UI/Modal"
 
 
-const ListItems = ({ data,onAdd, onRemove}) => {
-    const [counter, setCounter] = useState(0)
+const ListItems = ({ data, onAdd, onRemove }) => {
+    // const [counter, setCounter] = useState(0)
     const [showModal, setShowModal] = useState(false)
 
     const increaseCounterByOne = event => {
         event.stopPropagation()
         onAdd(data.id)
-        setCounter(counter+1)
+        // setCounter(counter+1)
     }
 
     const decreaseCounterByOne = event => {
         event.stopPropagation()
-        if(counter === 0) {
-            return;
-        }
-        if(counter === 1) {
-            onRemove(data.id);
-        }
-        setCounter(counter-1)
+        onRemove(data.id);
+        // if(counter === 0) {
+        //     return;
+        // }
+        // if(counter === 1) {
+        //     onRemove(data.id);
+        // }
+        // setCounter(counter-1)
     }
+
     const handleModal = () => {
         setShowModal(previousState => !previousState)
     }
 
     return (
         <Fragment>
-        <div onClick={handleModal} className={"item-card"}>
-            <img className={"img-fluid"} src={`/assets/${data.thumbnail}`} alt={data.title}/>
-            <div className={"item-card__information"}>
-                <div className={"pricing"}>
-                    <span>₹{data.discountedPrice}</span>
-                    <small>
-                        <strike>₹{data.price}</strike>
-                    </small>
+            <div onClick={handleModal} className={"item-card"}>
+                <img className={"img-fluid"} src={`/assets/${data.thumbnail}`} alt={data.title}/>
+                <div className={"item-card__information"}>
+                    <div className={"pricing"}>
+                        <span>₹{data.discountedPrice}</span>
+                        <small>
+                            <strike>₹{data.price}</strike>
+                        </small>
+                    </div>
+                    <div className={"title"}>
+                        <h3>{data.title}</h3>
+                    </div>
                 </div>
-                <div className={"title"}>
-                    <h3>{data.title}</h3>
-                </div>
+                {
+                    data.quantity < 1 ?
+                    <button className={"cart-add"} onClick={increaseCounterByOne}>
+                        <span>Add to Cart</span>
+                    
+                    </button>
+                    :
+                    <div className="cart-addon">
+                        <button onClick={decreaseCounterByOne}><span>-</span></button>
+                        <span>{data.quantity}</span>
+                        <button onClick={increaseCounterByOne}><span>+</span></button>
+                    </div>
+                }
             </div>
-            {
-                counter < 1 ?
-                <button className={"cart-add"} onClick={increaseCounterByOne}>
-                    <span>Add to Cart</span>
-                </button>
-                :
-                <div className="cart-addon">
-                    <button onClick={decreaseCounterByOne}><span>-</span></button>
-                    <span>{counter}</span>
-                    <button onClick={increaseCounterByOne}><span>+</span></button>
-                </div>
-            }
-        </div>
-            {showModal && 
+            { showModal && 
                 <Modal onClose={handleModal}>
                     <div className="item-card__modal">
                         <div className="img-wrap">
@@ -70,15 +73,15 @@ const ListItems = ({ data,onAdd, onRemove}) => {
                             </div>
                             <p>{data.description}</p>
                             {
-                                counter < 1 ?
+                                data.quantity < 1 ?
                                 <button className={"cart-add card-add__modal"} onClick={increaseCounterByOne}>
                                     <span>Add to Cart</span>
-                                   
+                                    
                                 </button>
                                 :
                                 <div className="cart-addon card-addon__modal">
                                     <button onClick={decreaseCounterByOne}><span>-</span></button>
-                                    <span>{counter}</span>
+                                    <span>{data.quantity}</span>
                                     <button onClick={increaseCounterByOne}><span>+</span></button>
                                 </div>
                             }
@@ -86,7 +89,7 @@ const ListItems = ({ data,onAdd, onRemove}) => {
                     </div>
                 </Modal> 
             }
-         </Fragment>
+        </Fragment>
     )
 }
 
