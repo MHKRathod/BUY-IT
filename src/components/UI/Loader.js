@@ -1,4 +1,4 @@
-import ReactDom from 'react-dom' 
+import ReactDom from 'react-dom'
 
 export const Backdrop = props => {
     const handleClick = () => {
@@ -6,8 +6,9 @@ export const Backdrop = props => {
             props.onClose();
         }
     }
-    return(
-        <div onClose={handleClick} className="Loader-overlay"></div>
+
+    return (
+        <div onClick={handleClick} className="loader-overlay"></div>
     )
 }
 
@@ -15,8 +16,9 @@ const Loader = () => {
     return (
         ReactDom.createPortal(
             <>
+            <Backdrop/>
             <div className="loading-dots">
-                <div>loading</div>
+                <div>Loading</div>
                 <div className="loading-dots--dot"></div>
                 <div className="loading-dots--dot"></div>
                 <div className="loading-dots--dot"></div>
@@ -25,7 +27,6 @@ const Loader = () => {
             document.getElementById("loader-root")
         )
     )
-} 
-
+}
 
 export default Loader
