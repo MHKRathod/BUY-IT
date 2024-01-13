@@ -1,53 +1,95 @@
-import {useState} from "react";
+import { Fragment, useState } from "react"
+import Modal from "./UI/Modal"
 
 
-const ListItems = ({data}) => {
+const ListItems = ({ data, onAdd, onRemove }) => {
+    // const [counter, setCounter] = useState(0)
+    const [showModal, setShowModal] = useState(false)
 
-    const [counter,setCounter] = useState(0)
-
-    const IncreaseCounterByOne = () =>{
-        setCounter(counter + 1);
-    }
-    const decreaseCounterByOne = () =>{
-        if(counter <= 0){
-            return;
-        }
-        setCounter(counter - 1);
+    const increaseCounterByOne = event => {
+        event.stopPropagation()
+        onAdd(data.id)
+        // setCounter(counter+1)
     }
 
-    const [message,setMessage] = useState("not added to cart")
+    const decreaseCounterByOne = event => {
+        event.stopPropagation()
+        onRemove(data.id);
+        // if(counter === 0) {
+        //     return;
+        // }
+        // if(counter === 1) {
+        //     onRemove(data.id);
+        // }
+        // setCounter(counter-1)
+    }
 
-    // const handleclick = () => {
-    //     setMessage("added to cart");
-    //     console.log("clicked",message)
-    // }
+    const handleModal = () => {
+        setShowModal(previousState => !previousState)
+    }
+
     return (
-        <div className={"item-card"}>
-            <img src={`/assets/${data.thumbnail}`} alt="some image"></img>
-            <div className={"item-card_information"}>
-                <div className={"pricing"}>
-                    <span>
-                        ${data.discountedPrice}
-                    </span>
-                    <small>
-                        <strike>${data.price}</strike>
-                    </small>
+        <Fragment>
+            <div onClick={handleModal} className={"item-card"}>
+                <img className={"img-fluid"} src={`/assets/${data.thumbnail}`} alt={data.title}/>
+                <div className={"item-card__information"}>
+                    <div className={"pricing"}>
+                        <span>₹{data.discountedPrice}</span>
+                        <small>
+                            <strike>₹{data.price}</strike>
+                        </small>
+                    </div>
+                    <div className={"title"}>
+                        <h3>{data.title}</h3>
+                    </div>
                 </div>
-                <div className={"title"}>
-                    <h3>{data.title}</h3>
-                </div>
-                {/* <small className={"cart-message"} onClick={ () => {console.log("clicked", data)}}>message</small>
-                    <button>
-                        <span>Add to cart</span>
-                    </button> */}
+                {
+                    data.quantity < 1 ?
+                    <button className={"cart-add"} onClick={increaseCounterByOne}>
+                        <span>Add to Cart</span>
+                    
+                    </button>
+                    :
                     <div className="cart-addon">
                         <button onClick={decreaseCounterByOne}><span>-</span></button>
-                        <span className="counter">{counter}</span>
-                        <button onClick={IncreaseCounterByOne}><span>+</span></button>
+                        <span>{data.quantity}</span>
+                        <button onClick={increaseCounterByOne}><span>+</span></button>
                     </div>
+                }
             </div>
-        </div>
-       
+            { showModal && 
+                <Modal onClose={handleModal}>
+                    <div className="item-card__modal">
+                        <div className="img-wrap">
+                            <img className={"img-fluid"} src={`/assets/${data.thumbnail}`} alt={data.title}/>
+                        </div>
+                        <div className="meta">
+                            <h3>{data.title}</h3>
+                            <div className={"pricing"}>
+                                <span>₹{data.discountedPrice}</span>
+                                <small>
+                                    <strike>₹{data.price}</strike>
+                                </small>
+                            </div>
+                            <p>{data.description}</p>
+                            {
+                                data.quantity < 1 ?
+                                <button className={"cart-add card-add__modal"} onClick={increaseCounterByOne}>
+                                    <span>Add to Cart</span>
+                                    
+                                </button>
+                                :
+                                <div className="cart-addon card-addon__modal">
+                                    <button onClick={decreaseCounterByOne}><span>-</span></button>
+                                    <span>{data.quantity}</span>
+                                    <button onClick={increaseCounterByOne}><span>+</span></button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </Modal> 
+            }
+        </Fragment>
     )
 }
 
