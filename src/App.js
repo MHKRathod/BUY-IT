@@ -4,12 +4,9 @@ import './App.css';
 import Products from './components/Products';
 =======
 const App = () => {
-  const [cartItems, setCartItems] = useState([])
-  const [eventQueue, setEventQueue] = useState({
-    id: "",
-    type: ""
-  })
+  const [cartItems, setCartItems] = useState(0)
 
+<<<<<<< HEAD
   const handleAddItem = item => {
     // setCartItems(cartItems + 1)
     let items = [...cartItems]
@@ -41,6 +38,14 @@ const App = () => {
       id,
       type
     })
+=======
+  const handleAddItem = () => {
+    setCartItems(cartItems + 1)
+  }
+
+  const handleRemoveItem = () => {
+    setCartItems(cartItems - 1)
+>>>>>>> 72b56e9 (1)
   }
 >>>>>>> 50dbd8d (order cartfunctions)
 
@@ -50,9 +55,9 @@ function App() {
     <Products/>
 =======
     <div>
-      <Header count={cartItems.length} items={cartItems} onHandleEvent={handleEventQueue}/>
+      <Header count={cartItems}/>
       <SubHeader/>
-      <Products onAddItem={handleAddItem} onRemoveItem={handleRemoveItem} eventState={eventQueue}/>
+      <Products onAddItem={handleAddItem} onRemoveItem={handleRemoveItem}/>
     </div>
 >>>>>>> 50dbd8d (order cartfunctions)
   );

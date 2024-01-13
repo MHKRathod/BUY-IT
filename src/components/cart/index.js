@@ -50,7 +50,7 @@ const Cart = ({count,items, onHandleEvent }) => {
                             }
                         </div>
                         { 
-                            count >= 0 &&
+                            count > 0 &&
                             <div className="checkout-modal_footer">
                                 <div className="totalAmount">
                                     <h4>Total Amount: </h4>

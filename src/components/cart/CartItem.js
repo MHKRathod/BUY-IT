@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const CartItem = ({data,onEmitDecreaseItem, onEmitIncreaseItem}) => {
     return(
             <div className="checkout-modal_list-item">
@@ -23,5 +24,24 @@ const CartItem = ({data,onEmitDecreaseItem, onEmitIncreaseItem}) => {
             </div>
     )
 }
+=======
+const CartItem = ({ data, onEmitDecreaseItem, onEmitIncreaseItem }) => {
+    // Check if 'data' is defined before accessing its properties
+    if (!data || !data.thumbnail) {
+        // You can return some default content or handle the error in a way that makes sense for your application
+        return (
+            <div className="checkout-modal_list-item">
+                <p>Error: Unable to retrieve product information.</p>
+            </div>
+        );
+    }
 
-export default CartItem
+    return (
+        <div className="checkout-modal_list-item">
+            {/* The rest of your component remains unchanged */}
+        </div>
+    );
+};
+>>>>>>> 72b56e9 (1)
+
+export default CartItem;

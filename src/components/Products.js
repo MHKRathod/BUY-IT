@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
-import ListItems from "./ListItems"
-import axios from "axios"
-import Loader from "./UI/Loader"
+import { useEffect, useState } from "react";
+import ListItems from "./ListItems";
+import axios from "axios";
+import Loader from "./UI/Loader";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const Products = ({onAddItem,onRemoveItem,eventState}) => {
     const [items, setItems] = useState([])
@@ -14,10 +15,17 @@ const Products = ({ onAddItem, onRemoveItem, eventState }) => {
     const [loader, setLoader] = useState(true)
     const[presentItems,setPresentItems] = useState([]) 
 >>>>>>> 50dbd8d (order cartfunctions)
+=======
+const Products = ({ onAddItem, onRemoveItem }) => {
+    const [items, setItems] = useState([]);
+    const [loader, setLoader] = useState(true);
+    const [presentItems, setPresentItems] = useState([]);
+>>>>>>> 72b56e9 (1)
 
     useEffect(() => {
         async function fetchItems() {
             try {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 const response = await axios.get('https://react-guide-2021-default-rtdb.firebaseio.com/items.json')
                 const data = response.data
@@ -52,16 +60,34 @@ const Products = ({ onAddItem, onRemoveItem, eventState }) => {
                 // setLoader(false)
 >>>>>>> 50dbd8d (order cartfunctions)
                 console.log("Error: ", error)
+=======
+                const response = await axios.get('https://react-guide-2021-default-rtdb.firebaseio.com/items.json');
+                const data = response.data;
+                
+                // Check if data is an array before mapping
+                const transformedData = Array.isArray(data)
+                    ? data.map((item, index) => ({
+                          ...item,
+                          id: index
+                      }))
+                    : [];
+
+                // setLoader(false)
+                setItems(transformedData);
+            } catch (error) {
+                // setLoader(false)
+                console.log("Error: ", error);
+>>>>>>> 72b56e9 (1)
                 alert("Some error occurred");
-            }
-            finally {
-                setLoader(false)
+            } finally {
+                setLoader(false);
             }
         }
 
         fetchItems();
-    }, [])
+    }, []);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  
 =======
@@ -127,30 +153,53 @@ const Products = ({ onAddItem, onRemoveItem, eventState }) => {
         setItems(data)
         onRemoveItem(data[index]);
 >>>>>>> 50dbd8d (order cartfunctions)
+=======
+    const handleAddItem = (id) => {
+        if (presentItems.indexOf(id) > -1) {
+            return;
         }
-    }
+        setPresentItems([...presentItems, id]);
+        onAddItem();
+    };
+
+    const handleRemoveItem = (id) => {
+        let index = presentItems.indexOf(id);
+        if (index > -1) {
+            let items = [...presentItems];
+            items.splice(index, 1);
+            setPresentItems([...items]);
+            onRemoveItem();
+>>>>>>> 72b56e9 (1)
+        }
+    };
 
     return (
         <>
-        <div className={"product-list"}>
-            <div className={"product-list--wrapper"}>
-                {/* <ListItem data={items[0]}></ListItem>
-                <ListItem data={items[1]}></ListItem> */}
-                {
-                    items.map(item => {
-                        return (<ListItems onAdd={handleAddItem} onRemove={handleRemoveItem} key={item.id} data={item}/>)
-                    })
-                }
-                {/* {[<ListItem data={item[0]}/>,<ListItem data={item[1]}/>,<ListItem data={item[3]}/>]} */}
+            <div className={"product-list"}>
+                <div className={"product-list--wrapper"}>
+                    {items.map((item) => {
+                        return (
+                            <ListItems
+                                onAdd={handleAddItem}
+                                onRemove={handleRemoveItem}
+                                key={item.id}
+                                data={item}
+                            />
+                        );
+                    })}
+                </div>
             </div>
-        </div>
-        { loader && <Loader/>}
+            {loader && <Loader />}
         </>
-    )
-}
+    );
+};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export default Products
 =======
 export default Products
 >>>>>>> 50dbd8d (order cartfunctions)
+=======
+export default Products;
+>>>>>>> 72b56e9 (1)
