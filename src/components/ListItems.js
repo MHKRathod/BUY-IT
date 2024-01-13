@@ -1,8 +1,12 @@
 import { Fragment, useState } from "react"
 import Modal from "./UI/Modal"
 
+<<<<<<< HEAD
 
 const ListItems = ({ data, onAdd, onRemove }) => {
+=======
+const ListItem = ({ data,onAdd, onRemove }) => {
+>>>>>>> 50dbd8d (order cartfunctions)
     // const [counter, setCounter] = useState(0)
     const [showModal, setShowModal] = useState(false)
 
@@ -14,6 +18,7 @@ const ListItems = ({ data, onAdd, onRemove }) => {
 
     const decreaseCounterByOne = event => {
         event.stopPropagation()
+<<<<<<< HEAD
         onRemove(data.id);
         // if(counter === 0) {
         //     return;
@@ -22,6 +27,14 @@ const ListItems = ({ data, onAdd, onRemove }) => {
         //     onRemove(data.id);
         // }
         // setCounter(counter-1)
+=======
+        onRemove(data.id)
+        // if(counter === 0) {
+        //     return;
+        // }
+        // onRemove(data.id)
+        // // setCounter(counter-1)
+>>>>>>> 50dbd8d (order cartfunctions)
     }
 
     const handleModal = () => {
@@ -44,7 +57,11 @@ const ListItems = ({ data, onAdd, onRemove }) => {
                     </div>
                 </div>
                 {
+<<<<<<< HEAD
                     data.quantity < 1 ?
+=======
+                   data.quantity < 1 ?
+>>>>>>> 50dbd8d (order cartfunctions)
                     <button className={"cart-add"} onClick={increaseCounterByOne}>
                         <span>Add to Cart</span>
                     
