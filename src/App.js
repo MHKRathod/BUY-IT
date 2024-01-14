@@ -1,12 +1,15 @@
+import { useState } from "react";
+import Header from "./components/layout/Header.js";
+import SubHeader from "./components/layout/SubHeader.js";
+import Products from "./components/Products.js"
 
-<<<<<<< HEAD
-import './App.css';
-import Products from './components/Products';
-=======
 const App = () => {
-  const [cartItems, setCartItems] = useState(0)
+  const [cartItems, setCartItems] = useState([])
+  const [eventQueue, setEventQueue] = useState({
+    id: "",
+    type: ""
+  })
 
-<<<<<<< HEAD
   const handleAddItem = item => {
     // setCartItems(cartItems + 1)
     let items = [...cartItems]
@@ -38,28 +41,14 @@ const App = () => {
       id,
       type
     })
-=======
-  const handleAddItem = () => {
-    setCartItems(cartItems + 1)
   }
 
-  const handleRemoveItem = () => {
-    setCartItems(cartItems - 1)
->>>>>>> 72b56e9 (1)
-  }
->>>>>>> 50dbd8d (order cartfunctions)
-
-function App() {
   return (
-<<<<<<< HEAD
-    <Products/>
-=======
     <div>
-      <Header count={cartItems}/>
+      <Header count={cartItems.length} items={cartItems} onHandleEvent={handleEventQueue}/>
       <SubHeader/>
-      <Products onAddItem={handleAddItem} onRemoveItem={handleRemoveItem}/>
+      <Products onAddItem={handleAddItem} onRemoveItem={handleRemoveItem} eventState={eventQueue}/>
     </div>
->>>>>>> 50dbd8d (order cartfunctions)
   );
 }
 

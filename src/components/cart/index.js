@@ -62,7 +62,7 @@ const Cart = ({count,items, onHandleEvent }) => {
                                         <span style={{marginLeft: "4px"}}>INR</span>
                                         </h4>
                                 </div>
-                                <button>Order Now</button>
+                                <button onClick={handleOrderModal}>Order Now</button>
                             </div>
                         }
                     </div>

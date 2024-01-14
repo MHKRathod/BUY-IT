@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import Cart from "../cart/index"
 
 const Header = ({count,items, onHandleEvent }) => {
-=======
-import Cart from "../cart/CartItem"
-
-const Header = ({ count }) => {
->>>>>>> 72b56e9 (1)
     return (
         <header>
             <div className="nav-brand">
@@ -46,11 +40,7 @@ const Header = ({ count }) => {
                 </svg>
             </div>
             <div className="cart-container">
-<<<<<<< HEAD
                 <Cart count={count} items={items}  onHandleEvent={onHandleEvent}/>
-=======
-                <Cart count={count}/>
->>>>>>> 72b56e9 (1)
             </div>
         </header >
     )
